@@ -1,0 +1,28 @@
+﻿@using MongoDB.Bson
+@using Mongo2.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <h2>INDEX</h2>
+        @{
+            List<usuario> all = (List<usuario>)TempData["listado"];
+            foreach (var a in all)
+            {
+                <p>@a.id</p>
+                <p>@a.nombre</p>
+                <p>@a.apellido</p>
+            }
+        }
+    </div>
+</body>
+</html>
