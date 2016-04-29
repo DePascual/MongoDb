@@ -25,11 +25,18 @@ namespace Mongo2.Controllers
         // GET: Home
         public ActionResult Index()
         {
+           
+            var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
+            usuario usuNuevo = new usuario();
+            usuNuevo.nombre = "Carolina";
+            usuNuevo.apellido = "Pascual";
 
-            //var client = new MongoClient("mongodb://localhost:27017");
-            //var database = client.GetDatabase("test");
+            _dbContext.numSeq();
+            _dbContext.insert(usuNuevo);
 
-            var collection = _dbContext.GetDatabase().GetCollection<usuario>("coleccion1");
+            
+
+
             var q = collection.AsQueryable();
 
             List<usuario> usuariosList = q.AsQueryable().Select(r => r).ToList();

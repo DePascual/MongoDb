@@ -9,8 +9,8 @@ namespace Mongo2.Models
 {
     public class usuario
     {
-        [BsonId]
-        public ObjectId id { get; set; }
+
+        public string _id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
     }
