@@ -14,13 +14,27 @@
 <body>
     <div> 
         <h2>INDEX</h2>
+        <h3>forma 1</h3>
         @{
             List<usuario> all = (List<usuario>)TempData["listado"];
             foreach (var a in all)
             {
-                <p>@a.id</p>
-                <p>@a.nombre</p>
-                <p>@a.apellido</p>
+                <p>@a._id</p>
+                <p>@a._nombre</p>
+                <p>@a._apellido1</p>
+                <p>@a._apellido2</p>
+            }
+        }
+
+        <h3>forma 2</h3>
+        @{
+            List<usuario> all2 = (List<usuario>)TempData["listado2"];
+            foreach (var a in all2)
+            {
+                <p>@a._id</p>
+                <p>@a._nombre</p>
+                <p>@a._apellido1</p>
+                <p>@a._apellido2</p>
             }
         }
     </div>

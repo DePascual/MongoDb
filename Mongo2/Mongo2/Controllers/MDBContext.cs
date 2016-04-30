@@ -10,7 +10,7 @@ namespace Mongo2.Controllers
 {
     public class MDBContext
     {
-        private bool usuNuevo;
+
         private IMongoDatabase _database;
         public MDBContext()
         {
@@ -22,32 +22,5 @@ namespace Mongo2.Controllers
         {
             return _database;
         }
-
-
-        public bool insert(usuario usuario)
-        {
-            var collection = GetDatabase().GetCollection<usuario>("usuarios");
-            collection.InsertOne(usuario);
-
-            return !String.IsNullOrEmpty(usuario._id.ToString());
-        }
-
-        public void numSeq()
-        {
-            var collection = GetDatabase().GetCollection<usuario>("usuarios");
-
-            var result = collection.FindOneAndReplace(new FindAndModifyArgs()
-            {
-                
-
-            })
-
-
-
-
-
-            var num = collection.AsQueryable().Where(r => r._id == "userid").Select(q => q);
-        }
-
     }
 }

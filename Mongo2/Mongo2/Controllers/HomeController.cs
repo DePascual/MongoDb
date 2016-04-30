@@ -3,6 +3,7 @@ using Mongo2.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,36 +28,34 @@ namespace Mongo2.Controllers
         {
            
             var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
-            usuario usuNuevo = new usuario();
-            usuNuevo.nombre = "Carolina";
-            usuNuevo.apellido = "Pascual";
 
-            _dbContext.numSeq();
-            _dbContext.insert(usuNuevo);
+            //Usuario Nuevo
+            var usuNuevo = new usuario();
+            usuNuevo._nombre = "Carolina";
+            usuNuevo._apellido1 = "Pascual"; 
+            usuNuevo._apellido2 = "Jimenez";
 
-            
+            //Se inserta el usuario
+            collection.InsertOne(usuNuevo);
 
+            //Recuperar usuarios con LINQ
+            var query =
+                from e in collection.AsQueryable()
+                select e;
 
-            var q = collection.AsQueryable();
+            List<usuario> usus = new List<usuario>();
 
-            List<usuario> usuariosList = q.AsQueryable().Select(r => r).ToList();
-
-            //var all = collection.Find(usuario).ToList();
-            //List<usuario> usuarioList = new List<usuario>();
-
-            //foreach (var a in all)
-            //{
-            //    BsonSerializer.Deserialize<usuario>(a);
-            //    usuario u = new usuario();
-            //    u.id = a["_id"].AsObjectId;
-            //    u.nombre = a["nombre"].AsString;
-            //    u.apellido = a["apellido"].AsString;
-
-            //    usuarioList.Add(u);
-            //}
+            foreach (var usu in query)
+            {
+                usus.Add(usu);
+            }
 
 
-            TempData["listado"] = usuariosList;
+            //Recuperar usuarios con lambda
+            List<usuario> usus2 = collection.AsQueryable().Select(x => x).ToList();
+
+            TempData["listado"] = usus;
+            TempData["listado2"] = usus2;
             return View();
         }
     }
