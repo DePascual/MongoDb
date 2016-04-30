@@ -24,7 +24,7 @@ namespace Mongo2.Models
         public string _nombre { get; set; }
         public string _apellido1 { get; set; }
         public string _apellido2 { get; set; }
-
+        public byte[] _foto { get; set; }
 
     }
 }
