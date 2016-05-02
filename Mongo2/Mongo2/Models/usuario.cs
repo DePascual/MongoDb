@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Mongo2.Models
 {
-
+    [BsonIgnoreExtraElements(true)]
     public class usuario
     {
         //[BsonConstructor]
@@ -20,6 +20,7 @@ namespace Mongo2.Models
         //    _apellido2 = apellido2;
         //}
 
+        //[BsonRepresentation(BsonType.String)]
         public ObjectId _id { get; set; }
         public string _nombre { get; set; }
         public string _apellido1 { get; set; }

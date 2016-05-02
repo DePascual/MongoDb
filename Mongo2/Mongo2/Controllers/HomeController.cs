@@ -42,13 +42,13 @@ namespace Mongo2.Controllers
             var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
 
             //Usuario Nuevo
-            var usuNuevo = new usuario();
-            usuNuevo._nombre = "Carolina";
-            usuNuevo._apellido1 = "Pascual";
-            usuNuevo._apellido2 = "Jimenez";
-            usuNuevo._foto = ImgToDb(new FileInfo(Server.MapPath("~//Content//Imagenes//portada.jpg")));
+            //var usuNuevo = new usuario();
+            //usuNuevo._nombre = "Carolina";
+            //usuNuevo._apellido1 = "Pascual";
+            //usuNuevo._apellido2 = "Jimenez";
+            //usuNuevo._foto = ImgToDb(new FileInfo(Server.MapPath("~//Content//Imagenes//portada.jpg")));
 
-            collection.Insert(usuNuevo);
+            //collection.Insert(usuNuevo);
             
             //Se inserta el usuario
            // collection.InsertOne(usuNuevo);
@@ -66,7 +66,7 @@ namespace Mongo2.Controllers
             //}
 
             //Recuperar usuarios con lambda
-            List<usuario> usus2 = collection.AsQueryable().Select(x => x).ToList();
+            List<usuario> usus2 = collection.AsQueryable().Select(x => (usuario)x).ToList();
 
             //TempData["listado"] = usus;
             TempData["listado2"] = usus2;
@@ -74,11 +74,17 @@ namespace Mongo2.Controllers
             return View();
         }
 
-        public ActionResult downloadPhoto()
+        //public ActionResult downloadPhoto(ObjectId id)
+        //{
+        //    var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
+        //    var img = collection.AsQueryable().Where(x=>x._id.Equals(id)).Select(x => x._foto).FirstOrDefault();
+        //    return File(img, "image/jpg");
+        //}
+
+        public ActionResult downloadPhoto(ObjectId id)
         {
             var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
-
-            var img = collection.AsQueryable().Select(x => x._foto).First();
+            var img = collection.AsQueryable().Select(x => x._foto).FirstOrDefault();
             return File(img, "image/jpg");
         }
     }
