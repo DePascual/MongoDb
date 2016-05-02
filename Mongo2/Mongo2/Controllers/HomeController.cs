@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -47,8 +48,10 @@ namespace Mongo2.Controllers
             usuNuevo._apellido2 = "Jimenez";
             usuNuevo._foto = ImgToDb(new FileInfo(Server.MapPath("~//Content//Imagenes//portada.jpg")));
 
+            collection.Insert(usuNuevo);
+            
             //Se inserta el usuario
-            collection.InsertOne(usuNuevo);
+           // collection.InsertOne(usuNuevo);
 
             ////Recuperar usuarios con LINQ
             //var query =
@@ -74,15 +77,8 @@ namespace Mongo2.Controllers
         public ActionResult downloadPhoto()
         {
             var collection = _dbContext.GetDatabase().GetCollection<usuario>("usuarios");
-            var img = collection.AsQueryable().Select(x => x._foto);
 
-            byte[] b;
-
-            foreach (var i in img)
-            {
-
-            }
-
+            var img = collection.AsQueryable().Select(x => x._foto).First();
             return File(img, "image/jpg");
         }
     }

@@ -10,17 +10,32 @@ namespace Mongo2.Controllers
 {
     public class MDBContext
     {
+        private MongoDatabase database;
 
-        private IMongoDatabase _database;
         public MDBContext()
         {
             var client = new MongoClient("mongodb://localhost");
-            this._database = client.GetDatabase("FitocracyDB_1");
+            var server = client.GetServer();
+            this.database = server.GetDatabase("FitocracyDB_1");
         }
 
-        public IMongoDatabase GetDatabase()
+
+        public MongoDatabase GetDatabase()
         {
-            return _database;
+            return database;
         }
+
+
+        //private IMongoDatabase _database;
+        //public MDBContext()
+        //{
+        //    var client = new MongoClient("mongodb://localhost");
+        //    this._database = client.GetDatabase("FitocracyDB_1");
+        //}
+
+        //public IMongoDatabase GetDatabase()
+        //{
+        //    return _database;
+        //}
     }
 }
