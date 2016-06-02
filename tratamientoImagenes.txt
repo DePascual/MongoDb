@@ -1,0 +1,35 @@
+String newFileName = “my-image”;
+File imageFile = new File(“/users/victor/images/image.png”);
+GridFS gfsPhoto = new GridFS(db, “photo”);
+GridFSInputFile gfsFile = gfsPhoto.createFile(imageFile);
+gfsFile.setFilename(newFileName);
+gfsFile.save();
+For more info see this: http://docs.mongodb.org/manual/core/gridfs/
+
+
+-----------------------------------
+http://www.codeproject.com/Articles/708140/Uploading-and-Viewing-Images-With-ASP-Net-MVC-and
+http://www.mkyong.com/mongodb/java-mongodb-save-image-example/
+
+
+
+------------------------------------
+http://www.it-ebooks.info/
+
+
+https://docs.mongodb.org/manual/tutorial/create-an-auto-incrementing-field/
+
+
+
+http://www.lybecker.com/blog/2014/06/27/mongodb-auto-increment-or-sequence/
+http://codingcanvas.com/using-mongodb-_id-field-with-c-pocos/
+http://mongodb.github.io/node-mongodb-native/2.0/api/Collection.html
+https://www.ecosia.org/search?q=findAndModify+findOneAndReplace&addon=firefox
+
+
+http://www.highoncoding.com/Articles/686_Implementing_Blog_Using_ASP_NET_MVC_and_MongoDb.aspx
+http://saasthara.com/blog/2013/10/using-mongodb-gridfs-to-save-large-files-c/
+
+
+
+http://www.layerworks.com/blog/2014/11/11/mongodb-shell-csharp-driver-comparison-cheat-cheet
